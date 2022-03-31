@@ -1,21 +1,38 @@
 name: Secondary
 
-on:
-  push:
+on: [push]
 
 jobs:
-  primary:
+  # Golang Image Builds
+  golang16:
     uses: gl-amagana/github-actions-playground/.github/workflows/workflow1.yml@main
     with:
       image-language: golang
       version: 1.16
-  secondary:
+  golang17:
     uses: gl-amagana/github-actions-playground/.github/workflows/workflow1.yml@main
     with:
       image-language: golang
       version: 1.17
-  tertiary:
+  golang18:
     uses: gl-amagana/github-actions-playground/.github/workflows/workflow1.yml@main
     with:
       image-language: golang
       version: 1.18
+
+  # Nodejs Image Builds
+  nodejs12:
+    uses: gl-amagana/github-actions-playground/.github/workflows/workflow1.yml@main
+    with:
+      image-language: nodejs
+      version: 12
+  nodejs16:
+    uses: gl-amagana/github-actions-playground/.github/workflows/workflow1.yml@main
+    with:
+      image-language: nodejs
+      version: 16
+  nodejs17:
+    uses: gl-amagana/github-actions-playground/.github/workflows/workflow1.yml@main
+    with:
+      image-language: nodejs
+      version: 17
