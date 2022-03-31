@@ -19,14 +19,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Check if files changed
-        uses: dorny/paths-filter@v2
-        id: changes
-        with:
-          filters: |
-            src:
-              - ${{ inputs.image-language }}/${{ inputs.version }}/**
-
       - name: Build image for ${{ inputs.image-language }} ${{ inputs.version }}
         if: steps.changes.outputs.src == 'true'
         run: |

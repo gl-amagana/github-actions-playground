@@ -3,8 +3,13 @@ name: Secondary
 on: [push]
 
 jobs:
+  checkfiles:
+    uses: gl-amagana/github-actions-playground/.github/workflows/file_check.yml@main
+
   # Golang Image Builds
   golang16:
+    needs: [checkfiles]
+    if: ${{ needs.checkfiles.outputs.src == 'true' }}
     uses: gl-amagana/github-actions-playground/.github/workflows/workflow1.yml@main
     with:
       image-language: golang
