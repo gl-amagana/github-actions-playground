@@ -1,0 +1,11 @@
+name: Secondary
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: my-org/my-workflow-repo./.github/workflows/workflow1.yml@v1

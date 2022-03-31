@@ -1,0 +1,35 @@
+name: Initial
+
+on:
+  workflow_call:
+    inputs:
+      image-language:
+        required: true
+        type: string
+      version:
+        required: true
+        type: string
+
+jobs:
+  build:
+    name: Test
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Check if files changed
+        uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            src:
+              - ${{ inputs.image-language }}/${{ inputs.version }}/**
+
+      - name: Build image for ${{ inputs.image-language }} ${{ inputs.version }}
+        if: steps.changes.outputs.src == 'true'
+        run: |
+          docker build . --file ${{ inputs.image-language }}/${{ inputs.version }}/alpine/Dockerfile --tag ${{ inputs.image-language }}-alpine-${{ inputs.version }}:${{ github.run_number }}
+          docker build . --file ${{ inputs.image-language }}/${{ inputs.version }}/bullseye/Dockerfile --tag ${{ inputs.image-language }}-bullseye-${{ inputs.version }}:${{ github.run_number }}
+
