@@ -14,6 +14,7 @@ jobs:
     with:
       image-language: golang
       version: 1.17
+    needs: golang16
   golang18:
     uses: gl-amagana/github-actions-playground/.github/workflows/workflow1.yml@main
     with:
