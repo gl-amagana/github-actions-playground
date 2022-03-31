@@ -5,4 +5,4 @@ on:
 
 jobs:
   build:
-    uses: gl-amagana/github-actions-playground/.github/workflows/workflow1.yml@v1
+    uses: gl-amagana/github-actions-playground/.github/workflows/workflow1.yml
