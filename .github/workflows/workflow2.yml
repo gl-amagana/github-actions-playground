@@ -27,21 +27,21 @@ jobs:
   # Golang Image Builds
   golang16:
     needs: [ checkfiles ]
-    if: steps.changes.golang16.src == 'true'
+    if: ${{ needs.checkfiles.outputs.golang16 == 'true' }}
     uses: gl-amagana/github-actions-playground/.github/workflows/workflow1.yml@main
     with:
       image-language: golang
       version: 1.16
   golang17:
     needs: [ checkfiles ]
-    if: steps.changes.golang17.src == 'true'
+    if: ${{ needs.checkfiles.outputs.golang17 == 'true' }}
     uses: gl-amagana/github-actions-playground/.github/workflows/workflow1.yml@main
     with:
       image-language: golang
       version: 1.17
   golang18:
     needs: [ checkfiles ]
-    if: steps.changes.golang18.src == 'true'
+    if: ${{ needs.checkfiles.outputs.golang18 == 'true' }}
     uses: gl-amagana/github-actions-playground/.github/workflows/workflow1.yml@main
     with:
       image-language: golang
@@ -50,21 +50,21 @@ jobs:
   # Nodejs Image Builds
   nodejs12:
     needs: [ checkfiles ]
-    if: steps.changes.nodejs12.src == 'true'
+    if: ${{ needs.checkfiles.outputs.nodejs12 == 'true' }}
     uses: gl-amagana/github-actions-playground/.github/workflows/workflow1.yml@main
     with:
       image-language: nodejs
       version: 12
   nodejs16:
     needs: [ checkfiles ]
-    if: steps.changes.nodejs16.src == 'true'
+    if: ${{ needs.checkfiles.outputs.nodejs16 == 'true' }}
     uses: gl-amagana/github-actions-playground/.github/workflows/workflow1.yml@main
     with:
       image-language: nodejs
       version: 16
   nodejs17:
     needs: [ checkfiles ]
-    if: steps.changes.nodejs17.src == 'true'
+    if: ${{ needs.checkfiles.outputs.nodejs17 == 'true' }}
     uses: gl-amagana/github-actions-playground/.github/workflows/workflow1.yml@main
     with:
       image-language: nodejs
