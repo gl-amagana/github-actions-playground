@@ -5,7 +5,4 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: my-org/my-workflow-repo./.github/workflows/workflow1.yml@v1
+    uses: gl-amagana/github-actions-playground/.github/workflows/workflow1.yml@v1
