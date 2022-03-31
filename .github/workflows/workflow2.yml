@@ -4,8 +4,18 @@ on:
   push:
 
 jobs:
-  build:
+  primary:
     uses: gl-amagana/github-actions-playground/.github/workflows/workflow1.yml@main
     with:
       image-language: golang
       version: 1.16
+  secondary:
+    uses: gl-amagana/github-actions-playground/.github/workflows/workflow1.yml@main
+    with:
+      image-language: golang
+      version: 1.17
+  tertiary:
+    uses: gl-amagana/github-actions-playground/.github/workflows/workflow1.yml@main
+    with:
+      image-language: golang
+      version: 1.18
