@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    uses: gl-amagana/github-actions-playground/.github/workflows/workflow1.yml
+    uses: gl-amagana/github-actions-playground/.github/workflows/workflow1.yml@v1
     with:
       image-language: golang
       version: 1.16
