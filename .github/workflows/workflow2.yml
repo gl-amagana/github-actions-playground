@@ -4,11 +4,7 @@ on: [ push ]
 env:
   MY_SECRET: ${{ secrets.SUPER_SECRET_VAR }}
 jobs:
-  # Golang Image Builds
   golang16:
-    needs: [ checkfiles ]
-    if: ${{ needs.checkfiles.outputs.golang16 == 'true' }}
     uses: ./.github/workflows/workflow1.yml
-    with:
-      image-language: golang
-      version: 1.16
+    secrets:
+      test_token: $MY_SECRET
