@@ -2,6 +2,11 @@ name: Initial
 
 on:
   workflow_call:
+    inputs:
+      test_input:
+        required: true
+        type: string
+        description: ignore
     secrets:
       test_token:
         required: true
@@ -16,5 +21,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Test
-        run: echo ${{ secrets.test_token }}
+        run: |
+          echo Secret: ${{ secrets.test_token }}
+          echo Var: ${{ inputs.test_input }}
 
