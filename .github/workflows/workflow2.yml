@@ -8,6 +8,6 @@ jobs:
   golang16:
     uses: ./.github/workflows/workflow1.yml
     with:
-      test_input: ${{ env.MY_VAR }}
+      test_input: $MY_VAR
     secrets:
       test_token: ${{ secrets.SUPER_SECRET_VAR }}
