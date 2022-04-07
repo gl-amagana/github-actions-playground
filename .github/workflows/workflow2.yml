@@ -7,4 +7,4 @@ jobs:
   golang16:
     uses: ./.github/workflows/workflow1.yml
     secrets:
-      test_token: $MY_SECRET
+      test_token: ${{ secrets.SUPER_SECRET_VAR }}
