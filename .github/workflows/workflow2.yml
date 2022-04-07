@@ -3,11 +3,10 @@ name: Secondary
 on: [ push ]
 env:
   MY_SECRET: ${{ secrets.SUPER_SECRET_VAR }}
-  MY_VAR: "Andrew was here"
 jobs:
   golang16:
     uses: ./.github/workflows/workflow1.yml
     with:
-      test_input: $MY_VAR
+      test_input: "Andrew was here"
     secrets:
       test_token: ${{ secrets.SUPER_SECRET_VAR }}
