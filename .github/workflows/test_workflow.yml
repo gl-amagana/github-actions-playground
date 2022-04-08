@@ -8,6 +8,8 @@ jobs:
       - name: Read CVEs to skip
         id: cves
         run: |
+          ls -l
+          pwd
           echo "::set-output name=to_skip::$(cat skip_checks.txt)"
       - name: Display CVEs
         run: echo ${{ steps.cves.outputs.to_skip }}
