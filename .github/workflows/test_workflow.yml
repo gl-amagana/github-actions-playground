@@ -18,3 +18,4 @@ jobs:
           directory: example/
           check: CKV_AWS_1
           skip_check: ${{ steps.cves.outputs.to_skip }}
+          output_format: cli
