@@ -16,6 +16,6 @@ jobs:
         uses: bridgecrewio/checkov-action@master
         with:
           directory: example/
-          check: CKV_AWS_1
-          skip_check: ${{ steps.cves.outputs.to_skip }}
+          check: ${{ steps.cves.outputs.to_skip }}
+          skip_check: CKV_AWS_1
           output_format: cli
