@@ -1,5 +1,7 @@
-name: Test Checkov
-on: [ push ]
+name: Test Checkov Skip Checks File (Bonus Cron)
+on:
+  schedule:
+    - cron: "0 14 * * 6" # every Saturday at 2am
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -19,3 +21,58 @@ jobs:
           check: ${{ steps.cves.outputs.to_skip }}
           skip_check: CKV_AWS_1
           output_format: json
+---
+name: Test Checkov Terraform Plan Output File
+on:
+  pull_request:
+    branches: [ main ]
+jobs:
+  example:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout Repo
+      - uses: actions/checkout@v2
+
+      # Setup Terraform w/ Version
+      - uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.1.7
+
+      - name: Terraform Plan
+        id: plan
+        if: github.event_name == 'pull_request'
+        run: terraform plan --out tfplan.binary -no-color
+        continue-on-error: false # Fails pipeline here if plan fails
+
+      # Optional; not necessary. Alternatively, could paste Github PR Comment w/ Plan.
+      - name: Terraform Show
+        id: show
+        run: terraform show -json tfplan.binary | jq '.' > tfplan.json
+
+      # Configure to what matches locally?
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+        id: setup_py
+
+      - name: Install Checkov
+        id: checkov
+        run: |
+          python3 -m pip3 install --upgrade pip3
+          pip3 install checkov
+        continue-on-error: true
+
+      - name: Run Checkov
+        id: run_checkov
+        run: checkov -f tfplan.json -o sarif -s
+        continue-on-error: true
+
+      # Ref: https://pvs-studio.com/en/blog/posts/cpp/0798/
+      - name: Upload SARIF file
+        id: upload_sarif
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: results.sarif
+          category: checkov
+        continue-on-error: true
