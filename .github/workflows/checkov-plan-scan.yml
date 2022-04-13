@@ -57,4 +57,4 @@ jobs:
         with:
           sarif_file: results.sarif
           category: checkov
-        continue-on-error: true
+        continue-on-error: true # Really shouldn't be false, imo.
