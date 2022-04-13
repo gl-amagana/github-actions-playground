@@ -20,11 +20,11 @@ jobs:
           directory: example/
           check: ${{ steps.cves.outputs.to_skip }}
           skip_check: CKV_AWS_1
-          output_format: sarif
-      - name: Upload SARIF file
-        id: upload_sarif
-        uses: github/codeql-action/upload-sarif@v1
-        with:
-          sarif_file: results.sarif
-          category: checkov
-        continue-on-error: true
+          output_format: json
+#      - name: Upload SARIF file
+#        id: upload_sarif
+#        uses: github/codeql-action/upload-sarif@v1
+#        with:
+#          sarif_file: results.sarif
+#          category: checkov
+#        continue-on-error: true
