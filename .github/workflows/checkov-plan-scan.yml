@@ -27,7 +27,8 @@ jobs:
         run: |
           cd example/
           terraform init
-          terraform plan --out tfplan -no-color
+          terraform plan -out tf.plan
+          terraform show -json tf.plan  > tf.json
           cd ../
         continue-on-error: true # Fails pipeline here if plan fails
 
@@ -49,14 +50,14 @@ jobs:
         id: run_checkov
         run: |
           cd example/
-          checkov -f tfplan -o sarif -s
-        continue-on-error: true # TODO: Fix extension
+          checkov -f tf.json -o sarif -s
+        continue-on-error: true
 
       # Ref: https://pvs-studio.com/en/blog/posts/cpp/0798/
       - name: Upload SARIF file
         id: upload_sarif
         uses: github/codeql-action/upload-sarif@v1
         with:
-          sarif_file: sarif
+          sarif_file: results.sarif
           category: checkov
         continue-on-error: true # Really shouldn't be false, imo.
