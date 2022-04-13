@@ -51,6 +51,9 @@ jobs:
         run: |
           cd example/
           checkov -f tf.json -o sarif -s
+          ls -l
+          cd ../
+          ls -l
         continue-on-error: true
 
       # Ref: https://pvs-studio.com/en/blog/posts/cpp/0798/
