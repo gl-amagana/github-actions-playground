@@ -27,10 +27,8 @@ jobs:
         run: |
           cd example/
           terraform init
-          terraform plan --out tfplan.binary -no-color
-          ls -l
+          terraform plan --out tfplan.json -no-color
           cd ../
-          ls -l
         continue-on-error: true # Fails pipeline here if plan fails
 
       # Configure to what matches locally?
@@ -49,7 +47,9 @@ jobs:
 
       - name: Run Checkov
         id: run_checkov
-        run: checkov -f tfplan.json -o sarif -s
+        run: |
+          cd example/
+          checkov -f tfplan.json -o sarif -s
         continue-on-error: true
 
       # Ref: https://pvs-studio.com/en/blog/posts/cpp/0798/
