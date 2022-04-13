@@ -1,27 +1,3 @@
-name: Test Checkov Skip Checks File (Bonus Cron)
-on:
-  schedule:
-    - cron: "0 14 * * 6" # every Saturday at 2am
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Read CVEs to skip
-        id: cves
-        run: |
-          echo "::set-output name=to_skip::$(cat skip_checks.txt)"
-      - name: Display CVEs
-        run: echo ${{ steps.cves.outputs.to_skip }}
-      - name: Run Checkov action
-        id: checkov
-        uses: bridgecrewio/checkov-action@master
-        with:
-          directory: example/
-          check: ${{ steps.cves.outputs.to_skip }}
-          skip_check: CKV_AWS_1
-          output_format: json
----
 name: Test Checkov Terraform Plan Output File
 on:
   pull_request:
