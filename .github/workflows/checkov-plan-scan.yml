@@ -49,7 +49,7 @@ jobs:
         id: run_checkov
         run: |
           cd example/
-          checkov -f tfplan.* -o sarif -s
+          checkov -f tfplan -o sarif -s
         continue-on-error: true # TODO: Fix extension
 
       # Ref: https://pvs-studio.com/en/blog/posts/cpp/0798/
