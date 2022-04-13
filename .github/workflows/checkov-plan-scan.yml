@@ -50,7 +50,7 @@ jobs:
         run: |
           cd example/
           checkov -f tfplan.* -o sarif -s
-        continue-on-error: true
+        continue-on-error: true # TODO: Fix extension
 
       # Ref: https://pvs-studio.com/en/blog/posts/cpp/0798/
       - name: Upload SARIF file
