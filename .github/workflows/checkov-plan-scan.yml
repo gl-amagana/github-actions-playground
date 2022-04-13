@@ -19,6 +19,7 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           cd example/
+          terraform init
           terraform plan --out tfplan.binary -no-color
         continue-on-error: false # Fails pipeline here if plan fails
 
