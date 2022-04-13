@@ -5,7 +5,6 @@ locals {
 data "aws_caller_identity" "current" {}
 
 resource "aws_s3_bucket" "foo-bucket" {
-  region        = "us-east-1"
   bucket        = local.bucket_name
   force_destroy = true
 
