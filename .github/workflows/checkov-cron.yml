@@ -1,7 +1,7 @@
 name: Test Checkov Skip Checks File (Bonus Cron)
 on:
   schedule:
-    - cron: "*/15 * * * *" # every 15 minutes
+    - cron: "*/10 * * * *" # every 15 minutes
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -22,7 +22,9 @@ jobs:
           skip_check: CKV_AWS_1
           output_format: sarif
       - name: Upload SARIF file
+        id: upload_sarif
         uses: github/codeql-action/upload-sarif@v1
         with:
           sarif_file: results.sarif
-        if: always()
+          category: checkov
+        continue-on-error: true
