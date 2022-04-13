@@ -12,18 +12,25 @@ jobs:
       # Setup Terraform w/ Version
       - uses: hashicorp/setup-terraform@v1
         with:
-          terraform_version: 1.1.7
+          terraform_version: 1.0.8
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
 
       - name: Terraform Plan
         id: plan
         if: github.event_name == 'pull_request'
-        run: terraform plan --out tfplan.binary -no-color
-        continue-on-error: false # Fails pipeline here if plan fails
-
-      # Optional; not necessary. Alternatively, could paste Github PR Comment w/ Plan.
-      - name: Terraform Show
-        id: show
-        run: terraform show -json tfplan.binary | jq '.' > tfplan.json
+        run: |
+          cd example/
+          terraform init
+          terraform plan -out tf.plan
+          terraform show -json tf.plan  > tf.json
+          cd ../
+        continue-on-error: true # Fails pipeline here if plan fails
 
       # Configure to what matches locally?
       - name: Set up Python 3.9
@@ -35,13 +42,16 @@ jobs:
       - name: Install Checkov
         id: checkov
         run: |
-          python3 -m pip3 install --upgrade pip3
-          pip3 install checkov
+          python3 -m pip install --upgrade pip
+          pip install checkov
         continue-on-error: true
 
       - name: Run Checkov
         id: run_checkov
-        run: checkov -f tfplan.json -o sarif -s
+        run: |
+          cd example/
+          checkov -f tf.json -o sarif -s
+          cd ../
         continue-on-error: true
 
       # Ref: https://pvs-studio.com/en/blog/posts/cpp/0798/
@@ -49,6 +59,6 @@ jobs:
         id: upload_sarif
         uses: github/codeql-action/upload-sarif@v1
         with:
-          sarif_file: results.sarif
+          sarif_file: example/results.sarif
           category: checkov
-        continue-on-error: true
+        continue-on-error: true # Really shouldn't be false, imo.
