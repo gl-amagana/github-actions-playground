@@ -1,7 +1,5 @@
 name: Test Checkov Terraform Plan Output File
-on:
-  pull_request:
-    branches: [ main ]
+on: [ push ]
 jobs:
   example:
     runs-on: ubuntu-latest
