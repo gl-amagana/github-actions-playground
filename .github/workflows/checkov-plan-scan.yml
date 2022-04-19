@@ -21,44 +21,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      - name: Terraform Plan
-        id: plan
-        if: github.event_name == 'pull_request'
-        run: |
-          cd example/
-          terraform init
-          terraform plan -out tf.plan
-          terraform show -json tf.plan  > tf.json
-          cd ../
-        continue-on-error: true # Fails pipeline here if plan fails
-
-      # Configure to what matches locally?
-      - name: Set up Python 3.9
-        uses: actions/setup-python@v1
+      - name: Deploy
+        uses: jonelantha/gatsby-s3-action@v1
         with:
-          python-version: 3.9
-        id: setup_py
-
-      - name: Install Checkov
-        id: checkov
-        run: |
-          python3 -m pip install --upgrade pip
-          pip install checkov
-        continue-on-error: true
-
-      - name: Run Checkov
-        id: run_checkov
-        run: |
-          cd example/
-          checkov -f tf.json -o sarif -s
-          cd ../
-        continue-on-error: true
-
-      # Ref: https://pvs-studio.com/en/blog/posts/cpp/0798/
-      - name: Upload SARIF file
-        id: upload_sarif
-        uses: github/codeql-action/upload-sarif@v1
-        with:
-          sarif_file: example/results.sarif
-          category: checkov
-        continue-on-error: true # Really shouldn't be false, imo.
+          dest-s3-bucket: marketing.qa.greenlight.gl-tech.io
