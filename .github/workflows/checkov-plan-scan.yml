@@ -19,6 +19,10 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
+      - name: Confirm Response
+        run: |
+          aws sts get-caller-identity
+
       - name: Deploy
         uses: jonelantha/gatsby-s3-action@v1
         with:
