@@ -7,10 +7,15 @@ jobs:
       # Checkout Repo
       - uses: actions/checkout@v2
 
-      # Setup Terraform w/ Version
-      - uses: hashicorp/setup-terraform@v1
+      - name: Use Node.js
+        uses: actions/setup-node@v2
         with:
-          terraform_version: 1.0.8
+          node-version: 14
+
+      - name: Build
+        run: |
+          npm ci
+          npm run build
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
