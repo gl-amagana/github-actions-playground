@@ -11,12 +11,13 @@ jobs:
     steps:
       # Get PR from latest merged commit to master
       - uses: actions-ecosystem/action-get-merged-pull-request@v1
+        name: Get Merged PR
         id: get-merged-pull-request
         with:
           github_token: ${{ secrets.PUBLIC_REPO_PAT }}
-
       # Drafts your next Release notes as Pull Requests are merged into "main"
       - uses: release-drafter/release-drafter@v5
+        name: Releaser
         with:
           publish: ${{ !contains(steps.get-merged-pull-request.outputs.labels, 'no-release') }}
           prerelease: false
