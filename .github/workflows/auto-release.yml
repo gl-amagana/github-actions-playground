@@ -7,7 +7,6 @@ on:
 
 jobs:
   publish:
-    name: Terraform
     uses: ./.github/workflows/reusable_auto_release.yml
     secrets:
-      gh_pat: ${{ secrets.GH_PAT }}
+      gh_pat: ${{ secrets.PUBLIC_REPO_PAT }}
