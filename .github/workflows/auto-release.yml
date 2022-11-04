@@ -6,8 +6,7 @@ on:
       - main
 
 jobs:
-  print_pr_number:
-    name: PR Number Printer
+  print-pr-number:
     runs-on: ubuntu-latest
     steps:
       - name : Print Title of PR
