@@ -5,8 +5,7 @@ on:
     branches:
       - main
 
-jobs:
-  publish:
-    uses: ./.github/workflows/reusable_auto_release.yml
-    secrets:
-      gh_pat: ${{ secrets.PUBLIC_REPO_PAT }}
+  print_title_of_pr:
+    steps:
+      - name : Print Title of PR
+        run: echo PR Title is - ${{ github.event.pull_request.title }}
