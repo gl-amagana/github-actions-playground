@@ -1,15 +1,16 @@
-name: PR Number
-
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build:
-    name: Example
     runs-on: ubuntu-latest
+
     steps:
+      - uses: actions/checkout@v3
+
       - name: Print PR Number
         run:
           |
