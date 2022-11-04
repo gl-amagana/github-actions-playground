@@ -1,7 +1,6 @@
-name: auto-release
+name: PR Number
 
 on:
-  pull_requests:
   push:
     branches:
       - main
