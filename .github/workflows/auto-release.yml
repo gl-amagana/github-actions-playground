@@ -17,4 +17,5 @@ jobs:
       - name: Print PR Number
         run:
           |
-          echo PR No. is - ${{ github.event.number }}
+          echo Number one: ${{ github.event.number }}
+          echo Number two: ${{ github.event.pull_request.number }}
