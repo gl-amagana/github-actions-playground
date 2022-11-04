@@ -8,8 +8,7 @@ on:
 jobs:
   print_pr_number:
     name: PR Number Printer
-    runs-on:
-      - self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name : Print Title of PR
         run:
