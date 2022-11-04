@@ -11,4 +11,4 @@ jobs:
       - self-hosted
     steps:
       - name : Print Title of PR
-        run: echo PR Title is - ${{ github.event.pull_request.title }}
+        run: echo PR Title is - ${{ jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH" }}
