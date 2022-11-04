@@ -5,7 +5,7 @@ on:
     branches:
       - main
 
-  print_title_of_pr:
+  print:
     steps:
       - name : Print Title of PR
         run: echo PR Title is - ${{ github.event.pull_request.title }}
