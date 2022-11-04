@@ -1,6 +1,7 @@
 name: auto-release
 
 on:
+  pull_requests:
   push:
     branches:
       - main
