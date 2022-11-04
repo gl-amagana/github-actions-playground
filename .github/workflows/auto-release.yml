@@ -10,7 +10,7 @@ jobs:
     name: Example
     runs-on: ubuntu-latest
     steps:
-      - name: Print Title of PR
+      - name: Print PR Number
         run:
           |
           echo PR No. is - ${{ jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH" }}
