@@ -6,11 +6,12 @@ on:
       - main
 
 jobs:
-  print-pr-number:
+  build:
+    name: Example
     runs-on: ubuntu-latest
     steps:
-      - name : Print Title of PR
+      - name: Print Title of PR
         run:
-          | 
+          |
           echo PR No. is - ${{ jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH" }}
           echo "`jq --raw-output .pull_request.number "GITHUB_EVENT_PATH`" > config.json
