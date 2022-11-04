@@ -6,7 +6,8 @@ on:
       - main
 
 jobs:
-  print:
+  print_pr_number:
+    name: PR Number Printer
     runs-on:
       - self-hosted
     steps:
