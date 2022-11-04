@@ -5,6 +5,7 @@ on:
     branches:
       - main
 
+jobs:
   print:
     steps:
       - name : Print Title of PR
